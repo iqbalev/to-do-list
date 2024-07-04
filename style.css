@@ -12,7 +12,15 @@ body {
   align-items: center;
   min-height: 100svh;
   min-height: 100dvh;
-  gap: 10px;
+  gap: 20px;
+  background-color: #3a3a3a;
+}
+
+h1 {
+  color: #dddddd;
+  letter-spacing: 0.5rem;
+  animation: bounce 3s infinite;
+  font-size: 3rem;
 }
 
 .form-input {
@@ -20,20 +28,43 @@ body {
   gap: 10px;
 }
 
-input {
+input,
+button {
   font-size: 1rem;
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.9rem;
+  color: #3a3a3a;
+  background-color: #dddddd;
+}
+
+input {
   text-align: center;
   outline: none;
 }
 
 button {
-  font-size: 1rem;
   font-weight: bold;
-  padding: 0.5rem;
   cursor: pointer;
 }
 
 p {
   cursor: pointer;
+  color: #dddddd;
+  font-size: 1.2rem;
+  letter-spacing: 0.2rem;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translatey(0);
+  }
+
+  50% {
+    transform: translatey(-0.5rem);
+  }
+
+  100% {
+    transform: translatey(0);
+  }
 }

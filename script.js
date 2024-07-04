@@ -25,6 +25,8 @@ function addToDo() {
 
   function markDoneToDo() {
     toDoItem.style.textDecoration = "line-through";
+    toDoItem.style.textDecorationColor = "#ec5151";
+    toDoItem.style.textDecorationThickness = "0.2rem";
   }
 
   function removeToDo() {
