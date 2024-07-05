@@ -1,51 +1,53 @@
-const formInput = document.querySelector(".form-input");
+const form = document.querySelector(".form-container");
 const userInput = document.getElementById("user-input");
 const listContainer = document.querySelector(".list-container");
 
-formInput.addEventListener("submit", function (event) {
+form.addEventListener("submit", function (event) {
   event.preventDefault();
   addToDo();
-  formInput.reset();
+  form.reset();
 });
 
 function addToDo() {
   const toDoItem = document.createElement("p");
+  toDoItem.classList.add("item");
   toDoItem.innerHTML = userInput.value;
 
-  const buttonEdit = document.createElement("button");
-  buttonEdit.classList.add("button-edit");
+  const editBtn = document.createElement("button");
+  editBtn.classList.add("btn-edit");
 
-  const buttonEditIcon = document.createElement("i");
-  buttonEditIcon.classList.add("fa-solid", "fa-pen");
+  const editBtnIcon = document.createElement("i");
+  editBtnIcon.classList.add("fa-solid", "fa-pen");
 
-  const buttonRemove = document.createElement("button");
-  buttonRemove.classList.add("button-remove");
+  const removeBtn = document.createElement("button");
+  removeBtn.classList.add("btn-remove");
 
-  const buttonRemoveIcon = document.createElement("i");
-  buttonRemoveIcon.classList.add("fa-solid", "fa-trash");
+  const removeBtnIcon = document.createElement("i");
+  removeBtnIcon.classList.add("fa-solid", "fa-trash");
 
   const list = document.createElement("div");
   list.classList.add("list");
 
+  const action = document.createElement("div");
+  action.classList.add("action");
+
+  editBtn.appendChild(editBtnIcon);
+  removeBtn.appendChild(removeBtnIcon);
+  action.appendChild(editBtn);
+  action.appendChild(removeBtn);
   list.appendChild(toDoItem);
-
-  list.appendChild(buttonEdit);
-  buttonEdit.appendChild(buttonEditIcon);
-
-  list.appendChild(buttonRemove);
-  buttonRemove.appendChild(buttonRemoveIcon);
-
+  list.appendChild(action);
   listContainer.appendChild(list);
 
   toDoItem.addEventListener("click", function () {
     markDoneToDo();
   });
 
-  buttonEdit.addEventListener("click", function () {
+  editBtn.addEventListener("click", function () {
     editToDo();
   });
 
-  buttonRemove.addEventListener("click", function () {
+  removeBtn.addEventListener("click", function () {
     removeToDo();
   });
 
