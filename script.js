@@ -1,5 +1,9 @@
+const prompt = document.querySelector(".prompt-container");
+const changeInput = document.querySelector(".change-input");
+const confirmBtn = document.querySelector(".btn-confirm");
+const closeBtn = document.querySelector(".btn-close");
 const form = document.querySelector(".form-container");
-const userInput = document.getElementById("user-input");
+const addInput = document.querySelector(".add-input");
 const listContainer = document.querySelector(".list-container");
 
 form.addEventListener("submit", function (event) {
@@ -11,7 +15,7 @@ form.addEventListener("submit", function (event) {
 function addToDo() {
   const toDoItem = document.createElement("p");
   toDoItem.classList.add("item");
-  toDoItem.innerHTML = userInput.value;
+  toDoItem.innerHTML = addInput.value;
 
   const editBtn = document.createElement("button");
   editBtn.classList.add("btn-edit");
@@ -23,20 +27,20 @@ function addToDo() {
   removeBtn.classList.add("btn-remove");
 
   const removeBtnIcon = document.createElement("i");
-  removeBtnIcon.classList.add("fa-solid", "fa-trash");
+  removeBtnIcon.classList.add("fa-solid", "fa-ban");
 
   const list = document.createElement("div");
   list.classList.add("list");
 
-  const action = document.createElement("div");
-  action.classList.add("action");
+  const listAction = document.createElement("div");
+  listAction.classList.add("list-action");
 
   editBtn.appendChild(editBtnIcon);
   removeBtn.appendChild(removeBtnIcon);
-  action.appendChild(editBtn);
-  action.appendChild(removeBtn);
+  listAction.appendChild(editBtn);
+  listAction.appendChild(removeBtn);
   list.appendChild(toDoItem);
-  list.appendChild(action);
+  list.appendChild(listAction);
   listContainer.appendChild(list);
 
   toDoItem.addEventListener("click", function () {
@@ -58,11 +62,30 @@ function addToDo() {
   }
 
   function editToDo() {
-    const promptInput = prompt("Enter a new things to do");
+    prompt.style.display = "flex";
 
-    if (promptInput) {
-      toDoItem.innerHTML = promptInput;
-    }
+    confirmBtn.addEventListener(
+      "click",
+      function () {
+        if (changeInput.value) {
+          toDoItem.innerHTML = changeInput.value;
+          prompt.style.display = "none";
+        } else {
+          alert("Please enter something!");
+        }
+      },
+      { once: true }
+    );
+
+    closeBtn.addEventListener(
+      "click",
+      function () {
+        prompt.style.display = "none";
+      },
+      { once: true }
+    );
+
+    changeInput.value = "";
   }
 
   function removeToDo() {
