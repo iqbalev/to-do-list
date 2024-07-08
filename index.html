@@ -17,37 +17,43 @@
     />
   </head>
   <body>
-    <div class="prompt-container">
-      <input
-        type="text"
-        name="change-input"
-        class="change-input"
-        placeholder="Change your task"
-        autocomplete="off"
-        required
-      />
-      <div class="prompt-action">
-        <button type="button" class="btn-confirm">Confirm</button>
-        <button type="button" class="btn-close">Close</button>
-      </div>
-    </div>
+    <dialog class="dialog-container">
+      <form class="form-edit">
+        <input
+          type="text"
+          name="edit-input"
+          class="edit-input"
+          placeholder="Edit your task"
+          autocomplete="off"
+          required
+        />
+        <div class="dialog-action">
+          <button type="submit" formmethod="dialog" class="btn-confirm">
+            Confirm
+          </button>
+          <button type="button" class="btn-close">Close</button>
+        </div>
+      </form>
+    </dialog>
 
-    <div class="main-screen">
+    <div class="main-container">
       <h1 class="title">To-do List</h1>
-      <form class="form-container" autocomplete="off">
+      <form class="form-add" autocomplete="off">
         <input
           type="text"
           name="add-input"
           class="add-input"
           placeholder="Enter a task"
+          required
         />
-        <button type="submit" class="btn-input">
+        <button type="submit" class="btn-add">
           <i class="fa-solid fa-plus"></i>
         </button>
       </form>
     </div>
 
     <div class="list-container"></div>
+
     <script src="script.js"></script>
   </body>
 </html>

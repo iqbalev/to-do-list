@@ -1,21 +1,21 @@
-const prompt = document.querySelector(".prompt-container");
-const changeInput = document.querySelector(".change-input");
-const confirmBtn = document.querySelector(".btn-confirm");
+const dialog = document.querySelector(".dialog-container");
+const editForm = document.querySelector(".form-edit");
+const editInput = document.querySelector(".edit-input");
 const closeBtn = document.querySelector(".btn-close");
-const form = document.querySelector(".form-container");
+const addForm = document.querySelector(".form-add");
 const addInput = document.querySelector(".add-input");
 const listContainer = document.querySelector(".list-container");
 
-form.addEventListener("submit", function (event) {
+addForm.addEventListener("submit", function (event) {
   event.preventDefault();
   addToDo();
-  form.reset();
+  addForm.reset();
 });
 
 function addToDo() {
   const toDoItem = document.createElement("p");
   toDoItem.classList.add("item");
-  toDoItem.innerHTML = addInput.value;
+  toDoItem.textContent = addInput.value;
 
   const editBtn = document.createElement("button");
   editBtn.classList.add("btn-edit");
@@ -43,52 +43,30 @@ function addToDo() {
   list.appendChild(listAction);
   listContainer.appendChild(list);
 
-  toDoItem.addEventListener("click", function () {
-    markDoneToDo();
-  });
+  toDoItem.addEventListener("click", () => markAndUnmarkDoneToDo());
+  editBtn.addEventListener("click", () => editToDo());
+  removeBtn.addEventListener("click", () => removeToDo());
 
-  editBtn.addEventListener("click", function () {
-    editToDo();
-  });
-
-  removeBtn.addEventListener("click", function () {
-    removeToDo();
-  });
-
-  function markDoneToDo() {
-    toDoItem.style.textDecoration = "line-through";
-    toDoItem.style.textDecorationColor = "#ec5151";
-    toDoItem.style.textDecorationThickness = "0.2rem";
+  function markAndUnmarkDoneToDo() {
+    if (toDoItem.style.textDecoration.includes("line-through")) {
+      toDoItem.style.textDecoration = "none";
+    } else {
+      toDoItem.style.textDecoration = "line-through";
+      toDoItem.style.textDecorationColor = "#ec5151";
+      toDoItem.style.textDecorationThickness = "0.2rem";
+    }
   }
 
   function editToDo() {
-    prompt.style.display = "flex";
-
-    confirmBtn.addEventListener(
-      "click",
-      function () {
-        if (changeInput.value) {
-          toDoItem.innerHTML = changeInput.value;
-          prompt.style.display = "none";
-        } else {
-          alert("Please enter something!");
-        }
-      },
+    dialog.showModal();
+    editForm.addEventListener(
+      "submit",
+      () => (toDoItem.textContent = editInput.value),
       { once: true }
     );
-
-    closeBtn.addEventListener(
-      "click",
-      function () {
-        prompt.style.display = "none";
-      },
-      { once: true }
-    );
-
-    changeInput.value = "";
+    closeBtn.addEventListener("click", () => dialog.close(), { once: true });
+    editInput.value = "";
   }
 
-  function removeToDo() {
-    listContainer.removeChild(list);
-  }
+  const removeToDo = () => listContainer.removeChild(list);
 }
